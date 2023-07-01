@@ -3,6 +3,9 @@ import cors from 'cors'
 import morgan from 'morgan'
 import { authRouter } from './routes/authRoutes'
 import { scheduleRouter } from './routes/scheduleRoutes'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // criando o app 
 export const app = express()

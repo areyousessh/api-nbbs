@@ -14,7 +14,6 @@ CREATE TABLE "schedules" (
     "id" TEXT NOT NULL,
     "barberName" TEXT NOT NULL,
     "date" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "schedules_pkey" PRIMARY KEY ("id")
 );
