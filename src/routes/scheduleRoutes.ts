@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { CreateScheduleController, getScheduleByIdController, getSchedulesController } from "../controllers/createScheduleController";
+import { CreateScheduleController, GetScheduleByIdController, GetSchedulesController } from "../controllers/createScheduleController";
 
 
 const scheduleRouter = Router()
 const scheduleController = new CreateScheduleController()
-const getScheduleController = new getScheduleByIdController()
-const getAllSchedulesController = new getSchedulesController()
+const getAllSchedulesController = new GetSchedulesController()
+const getScheduleByIdController = new GetScheduleByIdController()
 
 scheduleRouter.post('/create-schedule', scheduleController.handle)
-scheduleRouter.get('/schedules/:id', getScheduleController.handle)
 scheduleRouter.get('/schedules', getAllSchedulesController.handle)
+scheduleRouter.get('/schedule/:id', getScheduleByIdController.handle)
 
 
 export {scheduleRouter}
