@@ -1,63 +1,67 @@
 import { Request, Response } from "express";
 import { prismaClient } from "../database/prismaClient";
-import { Schedules } from "@prisma/client";
+
 
 export class CreateScheduleController {
     async handle (req: Request, res: Response) {
-        const {barberName, date, id_user} = req.body
-        const schedule = await prismaClient.scheduleUsers.create({
-            data: {
-                schedule: {
-                    create: {
-                        barberName,
-                        date,
-                    }
-                },
-                user: {
-                    connect: {
-                        id: id_user
+        try {
+            const {barberName, date, id_user} = req.body
+            const schedule = await prismaClient.scheduleUsers.create({
+                data: {
+                    schedule: {
+                        create: {
+                            barberName,
+                            date,
+                        }
+                    },
+                    user: {
+                        connect: {
+                            id: id_user
+                        }
                     }
                 }
-            }
-        })
-        res.json(schedule)
+            })
+            res.json(schedule)
+        } catch (e: any) {
+            console.log(e)
+            res.status(500).json({
+                e: 'Erro interno no servidor'
+            })
+        }
     }
 }
 
-export class getScheduleByIdController {
+export class GetSchedulesController {
     async handle (req: Request, res: Response) {
-        const {id_schedule} = req.params
-
         try {
-            const schedule = await prismaClient.schedules.findUnique({
-                where: {id: id_schedule}
-            })
-        if (schedule) {
-            res.status(200).json(schedule)
-         } 
-        else {
-            res.status(404).json({
-                error: 'Agendamento não encontrado'
-            })
-         }
+            const schedules = await prismaClient.schedules.findMany();
+            res.json(schedules)
         } catch (e: any) {
             console.log(e)
             res.status(500).json({
-                e: 'Erro interno do servidor'
+                e: 'Erro ao buscar os agendamentos'
             })
         }
-     }
+    }
 }
 
-export class getSchedulesController {
+export class GetScheduleByIdController {
     async handle (req: Request, res: Response) {
         try {
-            const schedules = prismaClient.schedules.findMany()
-            res.status(200).json(schedules)
+            const {id} = req.params
+            const schedule = await prismaClient.schedules.findUnique({
+                where: {id: id}
+            });
+        if (!schedule) {
+            return res.status(404).json({
+                message: 'Agendamento não encontrado.'
+            })
+        }
+        return res.json(schedule);
         } catch (e: any) {
-            console.log(e)
-            res.status(500).json({
-                e: 'Erro interno do servidor'
+            console.log(e);
+            return res.status(500).json({
+                message: 'Erro ao buscar o agendamento.'
             })
         }
     }

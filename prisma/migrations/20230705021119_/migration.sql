@@ -54,7 +54,7 @@ ALTER TABLE "GroupUsers" ADD CONSTRAINT "GroupUsers_id_user_fkey" FOREIGN KEY ("
 ALTER TABLE "GroupUsers" ADD CONSTRAINT "GroupUsers_id_group_fkey" FOREIGN KEY ("id_group") REFERENCES "Group"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ScheduleUsers" ADD CONSTRAINT "ScheduleUsers_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ScheduleUsers" ADD CONSTRAINT "ScheduleUsers_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ScheduleUsers" ADD CONSTRAINT "ScheduleUsers_id_schedule_fkey" FOREIGN KEY ("id_schedule") REFERENCES "schedules"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ScheduleUsers" ADD CONSTRAINT "ScheduleUsers_id_schedule_fkey" FOREIGN KEY ("id_schedule") REFERENCES "schedules"("id") ON DELETE CASCADE ON UPDATE CASCADE;

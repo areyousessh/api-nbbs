@@ -45,7 +45,7 @@ model GroupUsers {
 model ScheduleUsers {
   id          String    @id @default(uuid())
   id_user     String
-  user        Users     @relation(fields: [id_user], references: [id])
+  user        Users     @relation(fields: [id_user], references: [id], onDelete: Cascade)
   id_schedule String
-  schedule    Schedules @relation(fields: [id_schedule], references: [id])
+  schedule    Schedules @relation(fields: [id_schedule], references: [id], onDelete: Cascade)
 }
