@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { prismaClient } from "../database/prismaClient";
-import { Schedules } from "@prisma/client";
+
 
 export class CreateScheduleController {
     async handle (req: Request, res: Response) {
