@@ -50,7 +50,7 @@ export class GetScheduleByIdController {
         try {
             const {id} = req.params
             const schedule = await prismaClient.schedules.findUnique({
-                where: {id: id}
+                where: {id: parseInt(id)}
             });
         if (!schedule) {
             return res.status(404).json({
