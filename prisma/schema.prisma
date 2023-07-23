@@ -49,3 +49,11 @@ model ScheduleUsers {
   id_schedule Int
   schedule    Schedules @relation(fields: [id_schedule], references: [id], onDelete: Cascade)
 }
+
+model Barber {
+  id Int @id @default(autoincrement())
+  name String
+  email String
+  phone_number String
+  available_hours DateTime[]
+}
