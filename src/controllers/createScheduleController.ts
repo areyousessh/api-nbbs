@@ -5,11 +5,12 @@ import { prismaClient } from "../database/prismaClient";
 export class CreateScheduleController {
     async handle (req: Request, res: Response) {
         try {
-            const {barberName, date, id_user} = req.body
+            const {clientName, barberName, date, id_user} = req.body
             const schedule = await prismaClient.scheduleUsers.create({
                 data: {
                     schedule: {
                         create: {
+                            clientName,
                             barberName,
                             date,
                         }
