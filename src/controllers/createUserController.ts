@@ -74,3 +74,24 @@ export class LoginController {
         }
     }
 }
+
+export class GetUserByIdController {
+    async handle (req: Request, res: Response) {
+        const {id} = req.params
+        try {
+            const user = await prismaClient.users.findUnique(
+                {where: 
+                    {id: parseInt(id)},
+                });
+                if (!user) {
+                    return res.status(404).json({error: 'Usuário não encontrado'})
+                }
+                res.status(200).json(user)
+        } catch (e: any) {
+            console.log(e)
+            res.status(500).json({
+                e: 'Erro interno do servidor'
+            })
+        }
+    }
+}
