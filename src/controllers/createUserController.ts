@@ -8,8 +8,7 @@ const jwttoken = process.env.JWT_KEY
 export class CreateUserController {
     async handle (req: Request, res: Response) {
         try {
-
-        const {name, email, cellphone, password, id_group} = req.body;
+        const {name, email, cellphone, password, isAdmin} = req.body;
         const existingUser = await prismaClient.users.findUnique({where: {email}});
         if (existingUser) {
             return res.status(409).json({
@@ -18,22 +17,14 @@ export class CreateUserController {
          }
          const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await prismaClient.groupUsers.create({
+        const user = await prismaClient.users.create({
             data: {
-                user: {
-                  create: {
                     name,
                     email,
                     cellphone,
-                    password: hashedPassword
-                  } 
-                },
-                group: {
-                    connect: {
-                        id: id_group
-                    }
-                }
-            }
+                    password: hashedPassword,
+                    isAdmin
+                    } 
         })
         res.json(user);
     } catch (e: any) {
@@ -52,7 +43,7 @@ export class LoginController {
 
             const user = await prismaClient.users.findUnique({where: {email}});
             if (!user) {
-                return res.status(401).json({
+                return res.status(404).json({
                     error: 'Usuário não encontrado'
                 })
             }

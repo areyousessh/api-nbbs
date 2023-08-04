@@ -13,7 +13,7 @@ model Users {
   email         String          @unique
   cellphone     String
   password      String
-  GroupUsers    GroupUsers[]
+  isAdmin       Boolean
   ScheduleUsers ScheduleUsers[]
 
   @@map("users")
@@ -29,19 +29,6 @@ model Schedules {
   @@map("schedules")
 }
 
-model Group {
-  id         Int          @id @default(autoincrement())
-  name       String
-  GroupUsers GroupUsers[]
-}
-
-model GroupUsers {
-  id       Int          @id @default(autoincrement())
-  id_user  Int
-  user     Users  @relation(fields: [id_user], references: [id])
-  id_group Int
-  group    Group  @relation(fields: [id_group], references: [id])
-}
 
 model ScheduleUsers {
   id          Int          @id @default(autoincrement())
@@ -51,10 +38,3 @@ model ScheduleUsers {
   schedule    Schedules @relation(fields: [id_schedule], references: [id], onDelete: Cascade)
 }
 
-model Barber {
-  id Int @id @default(autoincrement())
-  name String
-  email String
-  phone_number String
-  available_hours DateTime[]
-}
