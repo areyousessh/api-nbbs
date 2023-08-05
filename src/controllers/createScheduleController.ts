@@ -13,6 +13,7 @@ export class CreateScheduleController {
                             clientName,
                             barberName,
                             date,
+                            id_user
                         }
                     },
                     user: {

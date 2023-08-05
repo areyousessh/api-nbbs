@@ -24,6 +24,7 @@ model Schedules {
   barberName    String
   clientName    String
   date          String
+  id_user       Int
   ScheduleUsers ScheduleUsers[]
 
   @@map("schedules")

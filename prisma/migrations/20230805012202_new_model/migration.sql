@@ -16,6 +16,7 @@ CREATE TABLE "schedules" (
     "barberName" TEXT NOT NULL,
     "clientName" TEXT NOT NULL,
     "date" TEXT NOT NULL,
+    "id_user" INTEGER NOT NULL,
 
     CONSTRAINT "schedules_pkey" PRIMARY KEY ("id")
 );
@@ -27,17 +28,6 @@ CREATE TABLE "ScheduleUsers" (
     "id_schedule" INTEGER NOT NULL,
 
     CONSTRAINT "ScheduleUsers_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Barber" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "phone_number" TEXT NOT NULL,
-    "available_hours" TIMESTAMP(3)[],
-
-    CONSTRAINT "Barber_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
