@@ -68,3 +68,38 @@ export class GetScheduleByIdController {
         }
     }
 }
+
+export class CreateAvailableSchedulesController {
+    async handle (req: Request, res: Response) {
+        try {
+            const {barberName, selectedDays, selectedTimes} = req.body;
+            const availableSchedules = await prismaClient.availableSchedules.create({
+                data: {
+                   barberName,
+                   selectedDays,
+                   selectedTimes
+                },
+            });
+            res.json({message: 'Agendamentos disponiveis criados com sucesso', availableSchedules});
+        } catch (e: any) {
+            console.log(e);
+            return res.status(500).json({
+                message: 'Erro interno do servidor'
+            })
+        }
+    }
+}
+
+export class GetAvailableSchedulesController {
+    async handle (req: Request, res: Response) {
+        try {
+            const availableSchedules = await prismaClient.availableSchedules.findMany()
+            res.json({availableSchedules})
+        } catch (e: any) {
+            console.log(e)
+            return res.status(500).json({
+                message: 'Erro interno do servidor'
+            })
+        }
+    }
+}
