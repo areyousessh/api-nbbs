@@ -3,7 +3,6 @@ import { prismaClient } from "../database/prismaClient";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-
 const jwttoken = process.env.JWT_KEY
 export class CreateUserController {
     async handle (req: Request, res: Response) {
@@ -35,7 +34,6 @@ export class CreateUserController {
     }
     }
 }
-
 export class LoginController {
     async handle (req: Request, res: Response) {
         try {
@@ -65,7 +63,6 @@ export class LoginController {
         }
     }
 }
-
 export class GetUserByIdController {
     async handle (req: Request, res: Response) {
         const {id} = req.params

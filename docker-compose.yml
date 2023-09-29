@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: nbbs-api
+      POSTGRES_PASSWORD: sesshgod10
+      POSTGRES_DB: nbbs
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
